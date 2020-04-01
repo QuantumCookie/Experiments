@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=MainMenu
+comment1.params=g
+comment1.target=MainMenu(GameManager)
+comment2.params=g
+comment2.target=void\ render(java.awt.Graphics2D)
+comment3.params=
+comment3.target=void\ update()
+comment4.params=b\ x\ y
+comment4.target=boolean\ contains(MainMenu.GButton,\ int,\ int)
+numComments=5

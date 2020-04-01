@@ -1,0 +1,22 @@
+#BlueJ class context
+comment0.target=Test
+comment1.params=
+comment1.target=Test()
+comment2.params=
+comment2.target=void\ update()
+comment3.params=
+comment3.target=void\ initialize()
+comment4.params=
+comment4.target=void\ start()
+comment5.params=
+comment5.target=void\ stop()
+comment6.params=
+comment6.target=void\ render()
+comment7.params=state
+comment7.target=void\ setState(utilities.State)
+comment7.text=public\ static\ Test\ getInstance()\r\n\ \ \ \ {\r\n\ \ \ \ \ \ \ \ if(instance\ \=\=\ null)instance\ \=\ new\ Test();\r\n\ \ \ \ \ \ \ \ return\ instance;\r\n}
+comment8.params=
+comment8.target=utilities.State\ getState()
+comment9.params=args
+comment9.target=void\ main(java.lang.String[])
+numComments=10

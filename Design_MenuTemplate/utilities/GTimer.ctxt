@@ -1,0 +1,27 @@
+#BlueJ class context
+comment0.target=GTimer
+comment1.params=tfps\ ttps\ mfps\ lis
+comment1.target=GTimer(double,\ double,\ double,\ GListener)
+comment10.params=
+comment10.target=void\ stopTimer()
+comment11.params=
+comment11.target=boolean\ isRunning()
+comment12.params=
+comment12.target=void\ gameLoop()
+comment2.params=
+comment2.target=void\ run()
+comment3.params=lis
+comment3.target=GTimer(GListener)
+comment4.params=lis
+comment4.target=void\ initialize(GListener)
+comment5.params=tfps\ ttps\ mfps\ lis
+comment5.target=void\ initialize(double,\ double,\ double,\ GListener)
+comment6.params=
+comment6.target=void\ start()
+comment7.params=
+comment7.target=void\ stop()
+comment8.params=
+comment8.target=float\ TPS()
+comment9.params=
+comment9.target=void\ startTimer()
+numComments=13
