@@ -1,0 +1,103 @@
+import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
+import java.awt.Color;
+import utilities.*;
+
+public class Dino
+{
+    public final float GRAVITY = 1f;
+    public final float TERMINAL_VELOCITY = 6f;
+    public final float JUMP = -20f;
+
+    public float x, y, width, height;
+    public Vector2f velocity;
+    public boolean isJumping, isGrounded, isCrouching;
+
+    private float floorY;
+
+    public ProtoChar(float width, float height)
+    {
+        this.width = width;
+        this.height = height;
+        velocity = new Vector2f();
+        isJumping = false;
+        isGrounded = false;
+        isCrouching = false;
+        floorY = (int)Test.HEIGHT - Floor.THICKNESS;
+        
+        this.x = Test.WIDTH / 3;
+        this.y = floorY;
+    }
+
+    public void update()
+    {
+        //checkInput();
+        updateVelocity();
+        clampWithinBoundaries();
+        checkJump();
+        checkCrouch();
+        move();
+    }
+    
+    private void checkInput()
+    {
+        velocity.x = Input.getAxis(Input.HORIZONTAL);
+    }
+    
+    private void checkJump()
+    {
+        if(!isCrouching && !isJumping && Input.keyDown(java.awt.event.KeyEvent.VK_UP))
+        {
+            isJumping = true;
+            isGrounded = false;
+            velocity.y = JUMP;
+        }
+    }
+    
+    private void checkCrouch()
+    {
+        if(isGrounded && !isCrouching && Input.keyDown(java.awt.event.KeyEvent.VK_DOWN))
+        {
+            isCrouching = true;
+            height /= 2;
+            y = Test.HEIGHT - height;
+        }
+        else if(isCrouching && Input.keyUp(java.awt.event.KeyEvent.VK_DOWN))
+        {
+            isCrouching = false;
+            height *= 2;
+            y = Test.HEIGHT - height;
+        }
+    }
+    
+    private void move()
+    {
+        x += velocity.x;
+        y += velocity.y;
+    }
+    
+    private void clampWithinBoundaries()
+    {
+        if(y >= floorY - height)
+        {
+            y = floorY - height;
+            velocity.y = 0;
+            isGrounded = true;
+            isJumping = false;
+        }
+    }
+
+    private void updateVelocity()
+    {
+        if(!isGrounded)
+        {
+            velocity.y += GRAVITY;
+        }
+    }
+
+    public void render(Graphics2D g)
+    {
+        g.setColor(Color.BLACK);
+        g.fill(new Rectangle2D.Float(x, y, width, height));
+    }
+}

@@ -1,0 +1,102 @@
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.geom.*;
+import java.awt.image.*;
+import javax.swing.*;
+
+import utilities.*;
+
+public class Test extends Canvas implements GListener
+{
+    public static final float WIDTH = 640, HEIGHT = 480;
+    
+    private BufferStrategy bs;
+    
+    private Dino player;
+    private Floor floor;
+    //private double x, y, w, h;
+    public Test()
+    {
+        Dimension size = new Dimension((int)WIDTH, (int)HEIGHT);
+        setPreferredSize(size);
+        setMaximumSize(size);
+        setMinimumSize(size);
+        
+        initialize();
+    }
+    
+    @Override
+    public void update()
+    {
+        player.update();
+        //x += Input.getAxis(Input.HORIZONTAL);
+    }
+    
+    private void initialize()
+    {
+        GTimer.initialize(this);
+        player = new Dino(20, 50);
+        floor = new Floor();
+        //x = y = 0;
+        //w = h = 10;
+        Input.setComponent(this);
+    }
+    
+    private void start()
+    {
+        GTimer.start();
+    }
+    
+    private void stop()
+    {
+        GTimer.stop();
+    }
+    
+    @Override
+    public void render()
+    {
+        bs = getBufferStrategy();
+        if(bs == null)
+        {
+            createBufferStrategy(3);
+            return;
+        }
+        
+        do
+        {
+            Graphics grap = bs.getDrawGraphics();
+            do
+            {
+                grap.clearRect(0, 0, (int)WIDTH, (int)HEIGHT);
+                render((Graphics2D)grap);
+            }
+            while(bs.contentsLost());
+            bs.show();
+            grap.dispose();
+        }
+        while(bs.contentsRestored());
+    }
+    
+    private void render(Graphics2D g)
+    {
+        //g.fill(new Rectangle2D.Double(x, y, w, h));
+        player.render(g);
+        floor.render(g);
+    }
+    
+    public static void main(String[] args)
+    {
+        Test test = new Test();
+        
+        JFrame frame = new JFrame("Test");
+        
+        frame.add(test);
+        frame.setResizable(false);
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        
+        test.start();
+    }
+}

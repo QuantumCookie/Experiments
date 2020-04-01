@@ -1,0 +1,34 @@
+package utilities;
+
+public final class Vector2D
+{
+    public double x, y;
+    
+    public Vector2D(double i, double j)
+    {
+        x = i;
+        y = j;
+    }
+    
+    public Vector2D()
+    {
+        this(0, 0);
+    }
+    
+    public double magnitude()
+    {
+        return Math.sqrt(x * x + y * y);
+    }
+    
+    public double dot(Vector2D other)
+    {
+        return x * other.x + y * other.y;
+    }
+    
+    public double cross(Vector2D other)
+    {
+        return x * other.y - other.x * y;
+    }
+    
+    //More methods coming soon
+}
